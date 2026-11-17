@@ -1,0 +1,4 @@
+#!/bin/bash
+# root-run 短命令入口（由模块安装到 /usr/local/bin）
+# 实现本体：~/workspace/tools/root-run.py（rootd 自装），可用 ROOT_RUN_PY 覆盖
+exec python3 "${ROOT_RUN_PY:-$HOME/workspace/tools/root-run.py}" "$@"

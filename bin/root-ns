@@ -1,0 +1,15 @@
+#!/bin/bash
+# root-ns '<命令>'  → 真 root（uid=0, u:r:magisk:s0）在容器 rootfs 内执行，可见 /host/*
+# root-ns -         → 从 stdin 读脚本
+set -u
+BRIDGE=/data/adb/modules/dshgo_rootd/bin/bridge.sh
+NS=$(readlink /proc/self/ns/mnt)
+F=/tmp/.rootns.sh
+if [ "${1:-}" = "-" ]; then cat > "$F"; else printf '%s\n' "$*" > "$F"; fi
+if ! command -v root-run >/dev/null 2>&1; then
+  echo "ERROR: 缺 root-run（dshgo_rootd 模块未运行？）" >&2; rm -f "$F"; exit 2
+fi
+root-run -q "sh $BRIDGE '$NS'"
+rc=$?
+rm -f "$F"
+exit $rc

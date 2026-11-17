@@ -1,0 +1,6 @@
+#!/bin/bash
+# host-mount → 重新把宿主目录挂进容器（App 重启后执行一次）
+set -u
+BRIDGE=/data/adb/modules/dshgo_rootd/bin/bridge.sh
+NS=$(readlink /proc/self/ns/mnt)
+root-run -q "sh $BRIDGE '$NS' mountonly"

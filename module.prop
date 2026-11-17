@@ -1,0 +1,6 @@
+id=dshgo_rootd
+name=DSH Go root 信箱 + 宿主目录桥
+version=v5.0.0
+versionCode=500
+author=dsh
+description=给 dsh-go 提供受控真 root 通道（私有信箱、自适应路径、硬拦截 + 软拦截确认、暂停开关、审计、客户端自装自愈），并把宿主 /data、/product 等目录 bind 进容器 mount namespace，附带 root-ns / host-mount / root-run 三条容器命令。
